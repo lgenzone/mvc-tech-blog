@@ -2,8 +2,6 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const auth = require('../../utils/auth');
 
-const sequelize = require('../../config/connection');
-
 router.get('/', auth, async (req, res) => {
     try {
         const dbPostData = await Post.findAll({
@@ -42,6 +40,5 @@ router.get('/', auth, async (req, res) => {
         res.status(500).json(err);
     }
 });
-
 
 module.exports = router;
