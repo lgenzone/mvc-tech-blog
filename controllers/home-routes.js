@@ -3,10 +3,9 @@ const { User, Post, Comment } = require('../models');
 const auth = require('../utils/auth');
 
 // homepage
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
    try {
     const posts = await Post.findAll({
-        raw: true,
         include: [
             {
                 model: User,
@@ -14,7 +13,9 @@ router.get('/', auth, async (req, res) => {
             },
         ],
     });
-    res.render('homepage', {posts, loggedIn: req.session.loggedIn});
+    //res.status(200).json(posts);
+   //res.render('homepage', {posts, loggedIn: req.session.loggedIn});
+   res.render('homepage', {posts});
    } catch (err) {
     res.status(500).json({ message: 'An error occurred, please try again.'})
    }
